@@ -51,10 +51,15 @@ npm run dev
 ## API Endpoints
 
 `GET /api/todos/`: Get all todos
+
 `POST /api/todos/`: Create a new todo
+
 `GET /api/todos/<id>/`: Get a todo by ID
+
 `PUT /api/todos/<id>/`: Update a todo by ID
+
 `PATCH /api/todos/<id>/`: Partially update a todo by ID
+
 `DELETE /api/todos/<id>/`: Delete a todo by ID
 
 ## Technologies Used
