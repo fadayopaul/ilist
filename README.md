@@ -22,9 +22,9 @@ Install NPM packages for the frontend
 
 1. Clone the repo
 
-   ```shell
-   git clone [https://github.com/fadayopaul/todo-list.git](https://github.com/fadayopaul/todo-list.git)
-   ```
+```shell
+git clone https://github.com/fadayopaul/todo-list.git
+ ```
 
 2. Change into the project directory:
 
@@ -46,7 +46,7 @@ npm install
 npm run dev
 ```
 
-2. Access the application in your browser at [http://localhost:3000](https://tododrf.onrender.com/todos)
+2. Access the application in your browser at [Todo List API](https://tododrf.onrender.com/todos)
 
 ## API Endpoints
 
