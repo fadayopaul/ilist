@@ -19,13 +19,26 @@ function Todo() {
   console.log(data);
 
   return (
-    <div>
-      <ul>
-        {data.map((items) => (
-          <li key={items.id}>{items.task}</li>
-        ))}
-      </ul>
-    </div>
+    <main>
+      <div className="h-screen bg-[#fce3c2] p-10">
+        <div className="box">
+          <div className="border-b-4 border-black py-6 text-center">
+            <h1>Things to do</h1>
+          </div>
+
+          <div className="p-5 ">
+            <ul>
+              {data.map((items) => (
+                <li key={items.id}>
+                  <input type="checkbox" />{" "}
+                  <span className="pl-2">{items.task}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
 
