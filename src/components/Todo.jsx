@@ -20,7 +20,7 @@ function Todo() {
 
   return (
     <main>
-      <div className=" bg-secondary flex h-screen flex-col justify-between p-10">
+      <div className="flex h-screen flex-col justify-between p-10">
         <div className="box">
           <div className="border-primary border-b-4 py-6 text-center">
             <p className="font-primary text-4xl font-extrabold">Things to do</p>
