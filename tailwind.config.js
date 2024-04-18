@@ -3,6 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        primary: "#33322E",
+        secondary: "#F6A89E",
+      },
+
       fontFamily: {
         primary: ["Roboto", "sans-serif"],
       },
