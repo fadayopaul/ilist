@@ -1,6 +1,7 @@
-# TODO-LIST Using React + Django
+# iLIST
+## React + Django
 
-A TodoList application built with React (frontend) and Django (backend) using RESTful API endpoints for CRUD operations.
+A Todo application built with React (frontend) and Django (backend) using RESTful API endpoints for CRUD operations.
 
 ## Features
 
@@ -46,7 +47,7 @@ npm install
 npm run dev
 ```
 
-2. Access the application in your browser at [Todo List API](https://tododrf.onrender.com/todos)
+2. Access the application in your browser at [iList API](https://tododrf.onrender.com/todos)
 
 ## API Endpoints
 
@@ -96,4 +97,4 @@ Distributed under the MIT License. See LICENSE for more information.
 
 [Paul Fadayo](https://github.com/fadayopaul) - [X-@fadayopaul](https://twitter.com/fadayopaul)
 
-Project Link: [Project Link](https://github.com/fadayopaul/todo-list)
+Project Link: [Project Link](https://github.com/fadayopaul/ilist)
