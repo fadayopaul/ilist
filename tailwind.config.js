@@ -10,6 +10,7 @@ export default {
 
       fontFamily: {
         primary: ["Roboto", "sans-serif"],
+        hand: ["Delicious Handrawn", "cursive"],
       },
     },
   },

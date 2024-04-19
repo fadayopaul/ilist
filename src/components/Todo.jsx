@@ -20,13 +20,15 @@ function Todo() {
 
   return (
     <main>
-      <div className="flex h-screen flex-col justify-between px-5 py-10">
-        <div className="box max-h-[60vh] overflow-y-auto">
-          <div className="border-primary border-b-4 py-6 text-center">
-            <p className="font-primary text-4xl font-extrabold">Things to do</p>
+      <div className="flex h-[80vh] flex-col justify-between px-5">
+        <div className="box">
+          <div className="bg-primary py-4">
+            <p className="font-hand text-center text-4xl text-white">
+              Todo List
+            </p>
           </div>
 
-          <div className="p-5">
+          <div className="max-h-[50vh] overflow-y-auto p-5">
             <ul>
               {data.map((items) => (
                 <TodoList {...items} key={items.id} />
