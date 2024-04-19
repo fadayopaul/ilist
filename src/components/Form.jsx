@@ -1,26 +1,14 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles";
 
-function Form({ setData }) {
+const API_URL = "https://tododrf.onrender.com/todos?format=json";
+
+function Form({ getTodoDataFn }) {
   const [state, setState] = useState({
     task: "",
-    completed: false,
   });
-
-  /* Async function to get data from the api */
-  const getTodoData = useCallback(async () => {
-    await axios
-      .get("https://tododrf.onrender.com/todos?format=json")
-      .then((response) => {
-        setData(response.data);
-      });
-  }, [setData]);
-
-  useEffect(() => {
-    getTodoData();
-  }, [getTodoData]);
 
   /* handle change events for the input text */
   const handleChange = (e) => {
@@ -41,14 +29,12 @@ function Form({ setData }) {
     };
 
     /* Send an Axios POST to the API endpoint*/
-    axios
-      .post("https://tododrf.onrender.com/todos?format=json", userData)
-      .then((response) => {
-        console.log(response);
+    axios.post(API_URL, userData).then((response) => {
+      console.log(response);
 
-        /* Call the getTodoData function */
-        getTodoData();
-      });
+      /* Call the getTodoData function */
+      getTodoDataFn;
+    });
 
     setState({
       task: "",
