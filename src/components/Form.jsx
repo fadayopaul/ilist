@@ -45,10 +45,10 @@ function Form({ setData }) {
       .post("https://tododrf.onrender.com/todos?format=json", userData)
       .then((response) => {
         console.log(response);
-      });
 
-    /* Send an Axios POST to the API endpoint */
-    getTodoData();
+        /* Call the getTodoData function */
+        getTodoData();
+      });
 
     setState({
       task: "",
