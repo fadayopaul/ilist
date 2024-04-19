@@ -42,21 +42,23 @@ function Form({ getTodoData }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="flex gap-5">
-        <input
-          type="text"
-          name="task"
-          value={state.task}
-          onChange={handleChange}
-          className="textInput focus:ring-none focus:border-primary focus:ring-primary w-full rounded-lg border-none"
-        />
+    <div className="pt-5">
+      <form onSubmit={handleSubmit}>
+        <div className="flex gap-5">
+          <input
+            type="text"
+            name="task"
+            value={state.task}
+            onChange={handleChange}
+            className="textInput focus:ring-none focus:border-primary focus:ring-primary w-full rounded-lg border-none"
+          />
 
-        <button className="bg-primary rounded-3xl px-6 py-2 font-primary text-white">
-          Send
-        </button>
-      </div>
-    </form>
+          <button className="bg-primary rounded-3xl px-6 py-2 font-primary text-white">
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
