@@ -38,7 +38,7 @@ function Todo() {
         <div className="textbox">
           <AddButton setShow={setShow} />
 
-          {show && <Form />}
+          {show && <Form getTodoData={getTodoData()} />}
         </div>
       </div>
     </main>
