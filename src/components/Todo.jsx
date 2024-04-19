@@ -19,16 +19,18 @@ function Todo() {
   }, []);
 
   return (
-    <main>
+    <main className="mt-[110px]">
       <div className="flex h-[80vh] flex-col justify-between px-5">
-        <div className="box">
+        <div className="box mb-5">
+          {/* Heading */}
           <div className="bg-primary py-4">
             <p className="font-hand text-center text-4xl text-white">
               Todo List
             </p>
           </div>
 
-          <div className="max-h-[50vh] overflow-y-auto p-5">
+          {/* Item Lists */}
+          <div className="max-h-[50vh] overflow-y-auto px-3 py-5">
             <ul>
               {data.map((items) => (
                 <TodoList {...items} key={items.id} />
@@ -37,6 +39,7 @@ function Todo() {
           </div>
         </div>
 
+        {/* Form and Button */}
         <div>
           <AddButton show={show} setShow={setShow} />
 

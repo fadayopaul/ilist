@@ -2,10 +2,12 @@ import logo from "../assets/logo.svg";
 
 function NavBar() {
   return (
-    <nav className="flex items-center gap-3 p-5">
-      <img src={logo} className="h-[4rem]" />
-      <p className="font-hand text-[40px]"> iList</p>
-    </nav>
+    <div className="fixed w-full bg-white">
+      <nav className="flex items-center gap-2 px-5 py-3">
+        <img src={logo} className="h-[3rem]" />
+        <p className="font-hand text-[30px] font-extrabold"> iList</p>
+      </nav>
+    </div>
   );
 }
 
