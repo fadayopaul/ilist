@@ -19,12 +19,12 @@ function Todo() {
   }, []);
 
   return (
-    <main className="mt-[110px]">
-      <div className="flex h-[80vh] flex-col justify-between px-5">
+    <main className="mt-[60px]">
+      <div className="flex h-[90vh] flex-col justify-between px-5 py-3">
         <div className="box mb-5">
           {/* Heading */}
-          <div className="bg-primary py-4">
-            <p className="font-hand text-center text-4xl text-white">
+          <div className="bg-primary py-2">
+            <p className="font-hand text-center text-2xl text-white">
               Todo List
             </p>
           </div>
