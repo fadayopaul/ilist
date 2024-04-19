@@ -20,8 +20,8 @@ function Todo() {
 
   return (
     <main>
-      <div className="flex h-screen flex-col justify-between p-10">
-        <div className="box">
+      <div className="flex h-[80vh] flex-col justify-between px-5 py-10">
+        <div className="box max-h-[50vh] overflow-y-auto">
           <div className="border-primary border-b-4 py-6 text-center">
             <p className="font-primary text-4xl font-extrabold">Things to do</p>
           </div>
@@ -35,10 +35,12 @@ function Todo() {
           </div>
         </div>
 
-        <div className="textbox">
+        <div>
           <AddButton setShow={setShow} />
 
-          {show && <Form getTodoData={getTodoData()} />}
+          <div className="py-3">
+            {show && <Form getTodoData={getTodoData()} />}
+          </div>
         </div>
       </div>
     </main>
