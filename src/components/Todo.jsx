@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AddButton, Form, TodoList } from "../components";
 import styles from "../styles";
 import Spinner from "./Spinner";
@@ -11,19 +11,14 @@ function Todo() {
   const [show, setShow] = useState(true);
 
   /* Async function to get data from the api */
-  const getTodoData = useCallback(async () => {
-    try {
-      await axios.get(API_URL).then((response) => {
-        setData(response.data);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+  async function getTodoData() {
+    const response = await axios.get(API_URL);
+    setData(response.data);
+  }
 
   useEffect(() => {
     getTodoData();
-  }, [getTodoData]);
+  }, []);
 
   return (
     <main className="mt-[60px]">
@@ -42,7 +37,11 @@ function Todo() {
             ) : (
               <ul>
                 {data.map((items) => (
-                  <TodoList {...items} key={items.id} />
+                  <TodoList
+                    {...items}
+                    getTodoData={getTodoData}
+                    key={items.id}
+                  />
                 ))}
               </ul>
             )}
@@ -54,7 +53,7 @@ function Todo() {
           <AddButton show={show} setShow={setShow} />
 
           <div className={`${!show ? "block" : "collapse"}`}>
-            {<Form getTodoDataFn={getTodoData()} />}
+            {<Form getTodoData={getTodoData} />}
           </div>
         </div>
       </div>

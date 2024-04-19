@@ -1,25 +1,43 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 import { TiDelete } from "react-icons/ti";
 import { TbEdit } from "react-icons/tb";
 import styles from "../styles";
 import { useState } from "react";
 
-function TodoList(items) {
-  const [isChecked, setIsChecked] = useState(false);
+function TodoList({ id, task, completed, getTodoData }) {
+  const [isChecked, setIsChecked] = useState(completed);
 
-  function handleCheckboxChange() {
-    const newStatus = !isChecked;
-    setIsChecked(newStatus);
+  async function handleCheckboxChange() {
+    try {
+      const updateData = { completed: !isChecked };
+      const response = await axios.put(
+        `https://tododrf.onrender.com/todos/${id}`,
+        updateData,
+      );
+      setIsChecked((prevState) => !prevState);
+      toast.success(`${task} item updated.`);
+      console.log(response);
+    } catch (error) {
+      toast.error(error.message);
+      console.error("Error updating todo item:", error);
+    }
   }
 
-  async function handleDelete(id) {
-    await axios
-      .delete(`https://tododrf.onrender.com/todos/${id}`)
-      .then((response) => {
-        console.log(response, "Deleted successfully");
-      });
+  async function handleDelete() {
+    try {
+      const response = await axios.delete(
+        `https://tododrf.onrender.com/todos/${id}`,
+      );
+      getTodoData(); // getTodoData is a function to fetch updated data
+      toast.success(`${task} item deleted!`);
+      console.log(response);
+    } catch (error) {
+      console.error("Error deleting todo item:", error);
+      toast.error(`Failed to delete ${task} item. Please try again.`);
+    }
   }
 
   return (
@@ -37,20 +55,21 @@ function TodoList(items) {
             htmlFor="checkbox"
             className={`${isChecked ? "line-through opacity-50" : ""} pl-3 font-medium`}
           >
-            {items.task}
+            {task}
           </label>
         </div>
 
         <div className="flex items-center gap-x-2">
-          <TbEdit size={23} className="cursor-pointer" />
-          <button
-            className="cursor-pointer"
-            onClick={() => handleDelete(items.id)}
-          >
-            <TiDelete size={26} />
+          <button>
+            <TbEdit size={23} className="cursor-pointer" />
+          </button>
+
+          <button className="cursor-pointer" onClick={handleDelete}>
+            <TiDelete size={26} color="#F6A89E" />
           </button>
         </div>
       </li>
+      <Toaster />
     </div>
   );
 }

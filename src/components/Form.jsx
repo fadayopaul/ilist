@@ -5,7 +5,7 @@ import styles from "../styles";
 
 const API_URL = "https://tododrf.onrender.com/todos?format=json";
 
-function Form({ getTodoDataFn }) {
+function Form({ getTodoData }) {
   const [state, setState] = useState({
     task: "",
   });
@@ -29,11 +29,9 @@ function Form({ getTodoDataFn }) {
     };
 
     /* Send an Axios POST to the API endpoint*/
-    axios.post(API_URL, userData).then((response) => {
-      console.log(response);
-
+    axios.post(API_URL, userData).then(() => {
       /* Call the getTodoData function */
-      getTodoDataFn;
+      getTodoData();
     });
 
     setState({
