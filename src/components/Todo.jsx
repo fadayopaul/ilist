@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AddButton, Form, TodoList } from "../components";
 import styles from "../styles";
+import Spinner from "./Spinner";
 
 function Todo() {
   const [data, setData] = useState([]);
@@ -18,11 +19,15 @@ function Todo() {
 
           {/* Item Lists */}
           <div className={`${styles.listItem}`}>
-            <ul>
-              {data.map((items) => (
-                <TodoList {...items} key={items.id} />
-              ))}
-            </ul>
+            {data.length === 0 ? (
+              <Spinner />
+            ) : (
+              <ul>
+                {data.map((items) => (
+                  <TodoList {...items} key={items.id} />
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 
