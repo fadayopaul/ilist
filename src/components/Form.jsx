@@ -55,7 +55,7 @@ function Form({ setData }) {
   };
 
   return (
-    <div className="pt-5">
+    <div className="pt-1">
       <form onSubmit={handleSubmit}>
         <div className="flex gap-5">
           <input
