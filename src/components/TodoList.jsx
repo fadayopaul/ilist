@@ -10,6 +10,8 @@ const API_URL = "https://tododrf.onrender.com/todos";
 
 function TodoList({ id, task, completed, getTodoData }) {
   const [isChecked, setIsChecked] = useState(completed);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(task);
 
   async function handleCheckboxChange() {
     try {
@@ -24,6 +26,29 @@ function TodoList({ id, task, completed, getTodoData }) {
     } catch (error) {
       toast.error(error.message);
       console.error("Error updating todo item:", error);
+    }
+  }
+
+  function handleEdit() {
+    setIsEditing(true);
+  }
+
+  async function handleSaveEdit() {
+    try {
+      const updateData = { task: editText };
+      const response = await axios.patch(
+        `${API_URL}/${id}?format=json`,
+        updateData,
+      );
+
+      setIsEditing(false);
+      getTodoData(); // Fetch updated data
+
+      toast.success(`Task updated to '${editText}'`);
+      console.log(response);
+    } catch (error) {
+      toast.error(error.message);
+      console.error(`Error editing ${task}:`, error);
     }
   }
 
@@ -42,26 +67,44 @@ function TodoList({ id, task, completed, getTodoData }) {
   return (
     <div className="py-2">
       <li className={`${styles.list}`}>
-        <div className="flex items-center">
+        <div className="flex items-center justify-evenly">
           <input
-            className={`${styles.checkbox}`}
             type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
+            className={`${styles.checkbox}`}
           />
 
-          <label
-            htmlFor="checkbox"
-            className={`${isChecked ? "line-through opacity-50" : ""} pl-3 font-medium`}
-          >
-            {task}
-          </label>
+          {isEditing ? (
+            <input
+              type="text"
+              value={editText}
+              onChange={(e) => setEditText(e.target.value)}
+              className=" ml-3 flex w-[100%] flex-wrap rounded-md border-2 border-primary px-2 py-1"
+            />
+          ) : (
+            <label
+              htmlFor="checkbox"
+              className={`${isChecked ? "line-through opacity-50" : ""} pl-3 font-medium`}
+            >
+              {task}
+            </label>
+          )}
         </div>
 
         <div className="flex items-center gap-x-2">
-          <button>
-            <TbEdit size={23} className="cursor-pointer" />
-          </button>
+          {isEditing ? (
+            <button
+              onClick={handleSaveEdit}
+              className="rounded-md bg-[#8CD4CB] px-3 py-1 text-white"
+            >
+              Save
+            </button>
+          ) : (
+            <button onClick={handleEdit}>
+              <TbEdit size={23} className="cursor-pointer" />
+            </button>
+          )}
 
           <button className="cursor-pointer" onClick={handleDelete}>
             <TiDelete size={26} color="#F6A89E" />
