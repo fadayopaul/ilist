@@ -1,12 +1,25 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-function Form({ getTodoData }) {
+function Form({ setData }) {
   const [state, setState] = useState({
     task: "",
     completed: false,
   });
+
+  /* Async function to get data from the api */
+  const getTodoData = useCallback(async () => {
+    await axios
+      .get("https://tododrf.onrender.com/todos?format=json")
+      .then((response) => {
+        setData(response.data);
+      });
+  }, [setData]);
+
+  useEffect(() => {
+    getTodoData();
+  }, [getTodoData]);
 
   /* handle change events for the input text */
   const handleChange = (e) => {
@@ -34,7 +47,7 @@ function Form({ getTodoData }) {
       });
 
     /* Send an Axios POST to the API endpoint */
-    getTodoData;
+    getTodoData();
 
     setState({
       task: "",

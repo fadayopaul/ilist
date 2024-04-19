@@ -1,26 +1,14 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AddButton, Form, TodoList } from "../components";
 
 function Todo() {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(true);
 
-  async function getTodoData() {
-    await axios
-      .get("https://tododrf.onrender.com/todos?format=json")
-      .then((response) => {
-        setData(response.data);
-      });
-  }
-
-  useEffect(() => {
-    getTodoData();
-  }, []);
-
   return (
     <main className="mt-[60px]">
-      <div className="flex h-[90vh] flex-col justify-between px-5 py-3">
+      <div className="flex h-[90vh] flex-col gap-3 px-5 py-3">
+        {/* Box */}
         <div className="box mb-5">
           {/* Heading */}
           <div className="bg-primary py-2">
@@ -44,7 +32,7 @@ function Todo() {
           <AddButton show={show} setShow={setShow} />
 
           <div className={`${!show ? "block" : "collapse"}`}>
-            {<Form getTodoData={getTodoData()} />}
+            {<Form setData={setData} />}
           </div>
         </div>
       </div>
