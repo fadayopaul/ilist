@@ -1,15 +1,13 @@
 import { TiDelete } from "react-icons/ti";
 import { TbEdit } from "react-icons/tb";
+import styles from "../styles";
 
 function TodoList(items) {
   return (
     <div className="py-2">
-      <li className="list flex items-center justify-between p-2">
+      <li className={`${styles.list}`}>
         <div className="flex items-center">
-          <input
-            type="checkbox"
-            className="checkbox focus:ring-primary peer cursor-pointer rounded-md border-gray-300 text-green-400"
-          />
+          <input type="checkbox" className={`${styles.checkbox}`} />
           <label className="pl-3 font-medium">{items.task}</label>
         </div>
 

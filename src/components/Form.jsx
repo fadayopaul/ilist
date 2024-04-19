@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
+import styles from "../styles";
 
 function Form({ setData }) {
   const [state, setState] = useState({
@@ -30,7 +31,7 @@ function Form({ setData }) {
     });
   };
 
-  /**handle submit events for the input text */
+  /* handle submit events for the input text */
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -55,20 +56,18 @@ function Form({ setData }) {
   };
 
   return (
-    <div className="pt-1">
+    <div className="pt-2">
       <form onSubmit={handleSubmit}>
-        <div className="flex gap-5">
+        <div className="flex gap-3">
           <input
             type="text"
             name="task"
             value={state.task}
             onChange={handleChange}
-            className="textInput focus:ring-none focus:border-primary focus:ring-primary w-full rounded-lg border-none"
+            className={`${styles.textInput}`}
           />
 
-          <button className="bg-primary rounded-3xl px-6 py-2 font-primary text-white">
-            Send
-          </button>
+          <button className={`${styles.formBtn}`}>Send</button>
         </div>
       </form>
     </div>

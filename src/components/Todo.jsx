@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AddButton, Form, TodoList } from "../components";
+import styles from "../styles";
 
 function Todo() {
   const [data, setData] = useState([]);
@@ -7,18 +8,16 @@ function Todo() {
 
   return (
     <main className="mt-[60px]">
-      <div className="flex h-[90vh] flex-col gap-3 px-5 py-3">
+      <div className={`${styles.TodoDiv}`}>
         {/* Box */}
-        <div className="box mb-5">
+        <div className={`${styles.box}`}>
           {/* Heading */}
-          <div className="bg-primary py-2">
-            <p className="font-hand text-center text-2xl text-white">
-              Todo List
-            </p>
+          <div className="bg-primary ">
+            <p className={`${styles.heading}`}>Todo List</p>
           </div>
 
           {/* Item Lists */}
-          <div className="max-h-[50vh] overflow-y-auto px-3 py-5">
+          <div className={`${styles.listItem}`}>
             <ul>
               {data.map((items) => (
                 <TodoList {...items} key={items.id} />

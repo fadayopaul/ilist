@@ -1,11 +1,10 @@
+import styles from "../styles";
+
 /* eslint-disable react/prop-types */
 function AddButton({ show, setShow }) {
   return (
     <div>
-      <p
-        onClick={() => setShow((prev) => !prev)}
-        className="inline-block cursor-pointer rounded-full bg-[#33322E] px-5 py-1 font-primary text-4xl text-[18px] font-medium text-white"
-      >
+      <p className={`${styles.btn}`} onClick={() => setShow((prev) => !prev)}>
         {show ? "+" : "x"}
       </p>
     </div>
