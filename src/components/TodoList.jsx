@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-
 import { TiDelete } from "react-icons/ti";
 import { TbEdit } from "react-icons/tb";
 import styles from "../styles";
-import { useState } from "react";
+
+const API_URL = "https://tododrf.onrender.com/todos";
 
 function TodoList({ id, task, completed, getTodoData }) {
   const [isChecked, setIsChecked] = useState(completed);
@@ -14,7 +15,7 @@ function TodoList({ id, task, completed, getTodoData }) {
     try {
       const updateData = { completed: !isChecked };
       const response = await axios.put(
-        `https://tododrf.onrender.com/todos/${id}`,
+        `${API_URL}/${id}?format=json`,
         updateData,
       );
       setIsChecked((prevState) => !prevState);
@@ -28,9 +29,7 @@ function TodoList({ id, task, completed, getTodoData }) {
 
   async function handleDelete() {
     try {
-      const response = await axios.delete(
-        `https://tododrf.onrender.com/todos/${id}`,
-      );
+      const response = await axios.delete(`${API_URL}/${id}?format=json`);
       getTodoData(); // getTodoData is a function to fetch updated data
       toast.success(`${task} item deleted!`);
       console.log(response);
