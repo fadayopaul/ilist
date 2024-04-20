@@ -25,6 +25,17 @@ function Todo() {
     getTodoData();
   }, []);
 
+  // Sort the todo items, with uncompleted items first and newer uncompleted items at the top
+  const sortedTodoItems = data.sort((a, b) => {
+    if (a.completed === b.completed) {
+      // If both items are completed or uncompleted, sort by ID in descending order
+      // to keep newer uncompleted items at the top
+      return b.id - a.id;
+    }
+    // Uncompleted items come first
+    return a.completed ? 1 : -1;
+  });
+
   return (
     <main className="mt-[60px]">
       <div className={`${styles.TodoDiv}`}>
@@ -43,7 +54,7 @@ function Todo() {
               <EmptyList />
             ) : (
               <ul>
-                {data.map((items) => (
+                {sortedTodoItems.map((items) => (
                   <TodoList
                     {...items}
                     getTodoData={getTodoData}
