@@ -13,10 +13,15 @@ function TodoList({ id, task, completed, getTodoData }) {
   const [isChecked, setIsChecked] = useState(completed);
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(task);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // NOTE: Function Functionality for the Checkbox
 
   async function handleCheckboxChange() {
+    setIsLoading(true);
+
     try {
-      const response = await axios.patch(`${API_URL}/${id}?format=json`, {
+      await axios.patch(`${API_URL}/${id}?format=json`, {
         id,
         task,
         completed: !isChecked,
@@ -24,19 +29,20 @@ function TodoList({ id, task, completed, getTodoData }) {
 
       setIsChecked((prev) => !prev); // Update isChecked state immediately
       getTodoData(); // Fetch updated data
-
-      toast.success(`${task} item updated.`);
-      console.log(response);
     } catch (error) {
       toast.error(error.message);
-      console.error("Error updating todo item:", error.message);
+    } finally {
+      setIsLoading(false);
+      toast.success(`${task} item updated.`);
     }
   }
 
+  // NOTE: Function Functionality to allow Editing
   function handleEdit() {
     setIsEditing(true);
   }
 
+  // NOTE: Function Functionality for the Saving Edit Changes
   async function handleSaveEdit() {
     // If the edited text is the same as the original text, return early
     if (editText === task) {
@@ -46,44 +52,49 @@ function TodoList({ id, task, completed, getTodoData }) {
     }
 
     try {
-      const updateData = { task: editText };
-      const response = await axios.patch(
-        `${API_URL}/${id}?format=json`,
-        updateData,
-      );
+      setIsLoading(true);
+
+      await axios.patch(`${API_URL}/${id}?format=json`, { task: editText });
 
       setIsEditing(false);
-      getTodoData(); // Fetch updated data
 
-      toast.success(`Task updated to '${editText}'`);
-      console.log(response);
+      getTodoData(); // Fetch updated data
     } catch (error) {
       toast.error(error.message);
-      console.error(`Error editing ${task}:`, error);
+    } finally {
+      setIsLoading(false);
+      toast.success(`Task updated to '${editText}'`);
     }
   }
 
+  // NOTE: Function Functionality for the Deletion
   async function handleDelete() {
     try {
-      const response = await axios.delete(`${API_URL}/${id}?format=json`);
+      setIsLoading(true);
+
+      await axios.delete(`${API_URL}/${id}?format=json`);
+
       getTodoData(); // getTodoData is a function to fetch updated data
-      toast.success(`${task} item deleted!`);
-      console.log(response);
     } catch (error) {
-      console.error("Error deleting todo item:", error);
-      toast.error(`Failed to delete ${task} item. Please try again.`);
+      toast.error(`Failed to delete ${task} item.`);
+    } finally {
+      setIsLoading(false);
+      toast.success(`${task} item deleted!`);
     }
   }
 
   return (
     <div className="py-2">
       <li className={`${styles.list}`}>
-        <div className="flex items-center justify-evenly">
+        <div
+          className={`flex items-center justify-evenly ${isLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
+        >
           <input
             type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
             className={`${styles.checkbox}`}
+            disabled={isLoading}
           />
 
           {isEditing ? (
@@ -92,6 +103,7 @@ function TodoList({ id, task, completed, getTodoData }) {
               value={editText}
               onChange={(e) => setEditText(e.target.value)}
               className=" ml-3 flex w-[100%] flex-wrap rounded-md border-2 border-primary px-2 py-1"
+              disabled={isLoading}
             />
           ) : (
             <label
@@ -107,17 +119,26 @@ function TodoList({ id, task, completed, getTodoData }) {
           {isEditing ? (
             <button
               onClick={handleSaveEdit}
-              className="ml-2 rounded-md bg-[#8CD4CB] px-3 py-1 text-white"
+              disabled={isLoading}
+              className={`ml-2 rounded-md bg-[#8CD4CB] px-3 py-1 text-white ${isLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
             >
               <GrDocumentUpdate />
             </button>
           ) : (
-            <button onClick={handleEdit}>
-              {!isChecked && <TbEdit size={23} className="cursor-pointer" />}
+            <button
+              onClick={handleEdit}
+              disabled={isLoading}
+              className={`${isLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
+            >
+              {!isChecked && <TbEdit size={23} />}
             </button>
           )}
 
-          <button className="cursor-pointer" onClick={handleDelete}>
+          <button
+            className={`${isLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
+            disabled={isLoading}
+            onClick={handleDelete}
+          >
             <TiDelete size={26} color="#F6A89E" />
           </button>
         </div>
