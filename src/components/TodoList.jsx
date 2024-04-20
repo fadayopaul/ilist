@@ -16,12 +16,11 @@ function TodoList({ id, task, completed, getTodoData }) {
 
   async function handleCheckboxChange() {
     try {
-      const updateData = { completed: !isChecked };
-      const response = await axios.put(
-        `${API_URL}/${id}?format=json`,
-        updateData,
-      );
-      setIsChecked((prevState) => !prevState);
+      const updateData = setIsChecked((prev) => !prev);
+      const response = await axios.patch(`${API_URL}/${id}`, {
+        completed: updateData,
+      });
+
       toast.success(`${task} item updated.`);
       console.log(response);
     } catch (error) {
