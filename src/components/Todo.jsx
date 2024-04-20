@@ -71,7 +71,7 @@ function Todo() {
           <AddButton show={show} setShow={setShow} />
 
           <div className={`${!show ? "block" : "collapse"}`}>
-            {<Form getTodoData={getTodoData} />}
+            {<Form setShow={setShow} getTodoData={getTodoData} />}
           </div>
         </div>
       </div>

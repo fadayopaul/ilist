@@ -18,10 +18,11 @@ const styles = {
   list: "rounded-lg border-2 border-solid border-primary flex items-center justify-between p-2",
 
   // Styles for AddButton.jsx component
-  btn: "bg-primary inline-block cursor-pointer rounded-full bg-pr px-5 py-1 font-primary text-4xl text-[18px] font-medium text-white",
+  btn: "cursor-pointer text-4xl",
 
   // Styles for Form.jsx component
-  formBtn: "bg-primary rounded-3xl px-6 py-2 font-primary text-white",
+  formBtn:
+    "bg-primary rounded-3xl px-6 py-2 font-medium text-[18px] text-white",
 
   textInput:
     "border-4 border-solid rounded-2xl border-primary focus:border-primary focus:ring-primary w-full",

@@ -6,7 +6,7 @@ import styles from "../styles";
 
 const API_URL = "https://tododrf.onrender.com/todos?format=json";
 
-function Form({ getTodoData }) {
+function Form({ getTodoData, setShow }) {
   const [task, setTask] = useState("");
 
   /* handle change events for the input text */
@@ -17,6 +17,13 @@ function Form({ getTodoData }) {
   /* handle submit events for the input text */
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (task === "") {
+      setShow((prev) => !prev);
+
+      toast.error("Input field cannot be empty!");
+      return;
+    }
 
     try {
       axios.post(API_URL, { task }).then(() => {
