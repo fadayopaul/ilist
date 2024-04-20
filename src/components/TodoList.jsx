@@ -4,6 +4,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { TiDelete } from "react-icons/ti";
 import { TbEdit } from "react-icons/tb";
+import { GrDocumentUpdate } from "react-icons/gr";
 import styles from "../styles";
 
 const API_URL = "https://tododrf.onrender.com/todos";
@@ -25,7 +26,7 @@ function TodoList({ id, task, completed, getTodoData }) {
       console.log(response);
     } catch (error) {
       toast.error(error.message);
-      console.error("Error updating todo item:", error);
+      console.error("Error updating todo item:", error.message);
     }
   }
 
@@ -34,6 +35,12 @@ function TodoList({ id, task, completed, getTodoData }) {
   }
 
   async function handleSaveEdit() {
+    // If the edited text is the same as the original text, return early
+    if (editText === task) {
+      setIsEditing(false);
+      return;
+    }
+
     try {
       const updateData = { task: editText };
       const response = await axios.patch(
@@ -98,7 +105,7 @@ function TodoList({ id, task, completed, getTodoData }) {
               onClick={handleSaveEdit}
               className="rounded-md bg-[#8CD4CB] px-3 py-1 text-white"
             >
-              Save
+              <GrDocumentUpdate />
             </button>
           ) : (
             <button onClick={handleEdit}>
