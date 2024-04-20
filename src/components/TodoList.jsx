@@ -113,7 +113,7 @@ function TodoList({ id, task, completed, getTodoData }) {
             </button>
           ) : (
             <button onClick={handleEdit}>
-              <TbEdit size={23} className="cursor-pointer" />
+              {!isChecked && <TbEdit size={23} className="cursor-pointer" />}
             </button>
           )}
 
