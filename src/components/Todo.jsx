@@ -3,17 +3,22 @@ import { AddButton, Form, TodoList } from "../components";
 import styles from "../styles";
 import Spinner from "./Spinner";
 import axios from "axios";
+import EmptyList from "./EmptyList";
 
 const API_URL = "https://tododrf.onrender.com/todos?format=json";
 
 function Todo() {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   /* Async function to get data from the api */
   async function getTodoData() {
     const response = await axios.get(API_URL);
-    setData(response.data);
+
+    const responseData = response.data;
+    setData(responseData);
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -32,8 +37,10 @@ function Todo() {
 
           {/* Item Lists */}
           <div className={`${styles.listItem}`}>
-            {data.length === 0 ? (
+            {isLoading ? (
               <Spinner />
+            ) : data.length === 0 ? (
+              <EmptyList />
             ) : (
               <ul>
                 {data.map((items) => (

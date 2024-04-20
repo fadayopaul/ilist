@@ -38,6 +38,7 @@ function TodoList({ id, task, completed, getTodoData }) {
     // If the edited text is the same as the original text, return early
     if (editText === task) {
       setIsEditing(false);
+      toast.error("Same as the original");
       return;
     }
 
@@ -103,7 +104,7 @@ function TodoList({ id, task, completed, getTodoData }) {
           {isEditing ? (
             <button
               onClick={handleSaveEdit}
-              className="rounded-md bg-[#8CD4CB] px-3 py-1 text-white"
+              className="ml-2 rounded-md bg-[#8CD4CB] px-3 py-1 text-white"
             >
               <GrDocumentUpdate />
             </button>
