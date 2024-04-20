@@ -56,9 +56,9 @@ function Todo() {
               <ul>
                 {sortedTodoItems.map((items) => (
                   <TodoList
+                    key={items.id}
                     {...items}
                     getTodoData={getTodoData}
-                    key={items.id}
                   />
                 ))}
               </ul>

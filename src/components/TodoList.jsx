@@ -32,8 +32,8 @@ function TodoList({ id, task, completed, getTodoData }) {
     } catch (error) {
       toast.error(error.message);
     } finally {
+      toast.success(`${task}" updated.`);
       setIsLoading(false);
-      toast.success(`${task} item updated.`);
     }
   }
 
