@@ -26,7 +26,7 @@ Install NPM packages for the frontend
 1. Clone the repo
 
 ```shell
-git clone https://github.com/fadayopaul/todo-list.git
+git clone https://github.com/paulthadev/todo-list.git
  ```
 
 2. Change into the project directory:
@@ -97,6 +97,6 @@ Distributed under the MIT License. See LICENSE for more information.
 
 ## Contributors
 
-[Paul Fadayo](https://github.com/fadayopaul) - [X-@fadayopaul](https://twitter.com/fadayopaul)
+[Paul Fadayo](https://github.com/paulthadev) - [X-@fadayopaul](https://twitter.com/paulthadev)
 
-Project Link: [Project Link](https://github.com/fadayopaul/ilist)
+Project Link: [Project Link](https://github.com/paulthadev/ilist)
