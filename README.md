@@ -97,6 +97,6 @@ Distributed under the MIT License. See LICENSE for more information.
 
 ## Contributors
 
-[Paul Fadayo](https://github.com/paulthadev) - [X-@fadayopaul](https://twitter.com/paulthadev)
+[Paul Fadayo](https://github.com/paulthadev) - [X-@paulthadev](https://twitter.com/paulthadev)
 
 Project Link: [Project Link](https://github.com/paulthadev/ilist)
